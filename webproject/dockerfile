@@ -1,13 +1,15 @@
-# Tomcat 9 chạy JDK 17 (khớp môi trường local)
+# Tomcat 9 + JDK 17 (khớp môi trường local)
 FROM tomcat:9.0-jdk17-temurin
 
-# Xóa ứng dụng mẫu cho sạch
+# Dọn app mẫu cho sạch
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copy WAR của bạn và deploy làm ROOT (context path = "/")
+# Deploy WAR của bạn
+# - Dùng ROOT.war => context path = "/"
+#   (vào thẳng http://localhost:8080/)
 COPY webproject.war /usr/local/tomcat/webapps/ROOT.war
 
-# (Tùy chọn) Healthcheck xem Tomcat sống không
+# (Tuỳ chọn) Healthcheck
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
   CMD wget -qO- http://127.0.0.1:8080/ || exit 1
 
