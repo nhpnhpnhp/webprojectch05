@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Murach's Java Servlets and JSP – Survey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/survey.css" />
+</head>
+<body>
+  <div class="bg">
+    <header class="site-header" role="banner">
+      <div class="header-inner">
+        <div class="brand">
+          <img src="images/murachlogo.jpg" alt="Murach Logo" class="logo" />
+          <div class="brand-text">
+            <h1>Survey</h1>
+            <p class="subtitle">We'd appreciate a minute of your time 🙌</p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="container" role="main">
+      <form class="card" action="survey" method="post" novalidate>
+        <fieldset class="section">
+          <legend>Your information</legend>
+
+          <div class="grid">
+            <label class="field span-2">
+              <span class="label">First name <span aria-hidden="true" class="req">*</span></span>
+              <input class="input" type="text" name="firstName" required autocomplete="given-name" />
+              <small class="hint">As it appears on your profile.</small>
+            </label>
+
+            <label class="field span-2">
+              <span class="label">Last name <span aria-hidden="true" class="req">*</span></span>
+              <input class="input" type="text" name="lastName" required autocomplete="family-name" />
+            </label>
+
+            <label class="field span-2">
+              <span class="label">Email <span aria-hidden="true" class="req">*</span></span>
+              <input class="input" type="email" name="email" required autocomplete="email" />
+            </label>
+
+            <label class="field span-2">
+              <span class="label">Date of birth</span>
+              <input class="input" type="date" name="dob" />
+            </label>
+          </div>
+        </fieldset>
+        <fieldset class="section">
+          <legend>How did you hear about us?</legend>
+          <div class="choices">
+            <label class="choice">
+              <input type="radio" name="heardFrom" value="Search Engine" checked />
+              <span>Search engine</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="heardFrom" value="Friend" />
+              <span>Word of mouth</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="heardFrom" value="Social Media" />
+              <span>Social media</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="heardFrom" value="Other" />
+              <span>Other</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="section">
+          <legend>Announcements</legend>
+          <div class="choices stack">
+            <label class="choice">
+              <input type="checkbox" name="wantsUpdates" />
+              <span>Yes, I'd like news about new CDs and special offers.</span>
+            </label>
+            <label class="choice">
+              <input type="checkbox" name="emailOK" />
+              <span>Yes, please send me email announcements.</span>
+            </label>
+          </div>
+        </fieldset>
+        <fieldset class="section">
+          <legend>Preferred contact method</legend>
+          <label class="field span-2">
+            <span class="label">Please contact me by</span>
+            <select class="input" name="contactVia">
+              <option value="Both" selected>Email or postal mail</option>
+              <option value="Email">Email only</option>
+              <option value="Postal Mail">Postal mail only</option>
+            </select>
+          </label>
+        </fieldset>
+
+        <div class="actions">
+          <button class="btn" type="submit">Submit survey</button>
+          <p class="form-note">By submitting, you agree to our terms of service.</p>
+        </div>
+      </form>
+
+      <footer class="site-footer" role="contentinfo">
+        <p>© <span id="y"></span> Murach. All rights reserved.</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Update year automatically
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
