@@ -1,18 +1,16 @@
-# Tomcat 9 + JDK 17 (khớp môi trường local)
-FROM tomcat:9.0-jdk17-temurin
+# Dockerfile
+FROM tomcat:9.0-jdk17
 
-# Dọn app mẫu cho sạch
+# Xoá webapp mặc định
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Deploy WAR của bạn
-# - Dùng ROOT.war => context path = "/"
-#   (vào thẳng http://localhost:8080/)
-COPY webproject.war /usr/local/tomcat/webapps/ROOT.war
+# Deploy app thành ROOT.war để chạy ở "/"
+COPY ch04_ex1_survey.war /usr/local/tomcat/webapps/ROOT.war
 
-# (Tuỳ chọn) Healthcheck
-HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
-  CMD wget -qO- http://127.0.0.1:8080/ || exit 1
-
+# Cổng mặc định khi chạy local; Render sẽ gán biến $PORT riêng
 EXPOSE 8080
-CMD ["catalina.sh", "run"]
 
+# Đổi cổng trong server.xml sang $PORT (hoặc 8080 nếu không có $PORT) rồi chạy Tomcat
+CMD sh -c 'P="${PORT:-8080}"; \
+  sed -i "s/port=\\\"8080\\\"/port=\\\"$P\\\"/" /usr/local/tomcat/conf/server.xml && \
+  catalina.sh run'
